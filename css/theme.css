@@ -1,0 +1,88 @@
+/* ============================================================
+    THEME.CSS — Design Tokens for sediqi.dev
+    To switch color palette: comment out active theme block
+    and uncomment an alternative theme block below.
+   ============================================================ */
+
+/* ============================================================
+    ACTIVE THEME: Dark Navy + Teal
+   ============================================================ */
+:root {
+
+  /* Backgrounds — from darkest to slightly lighter */
+  --bg:        #08111f;
+  --bg2:       #0c1828;
+  --surface:   #101e30;
+  --surface2:  #152438;
+
+  /* Borders */
+  --border:    #1e3348;
+  --border2:   #253d57;
+
+  /* Text */
+  --text:      #e4edf6;
+  --muted:     #7a96b0;
+  --faint:     #3d5a74;
+
+  /* Accent — teal */
+  --accent:       #14b8a6;
+  --accent-dim:   #0d8a7c;
+  --accent-glow:  rgba(20, 184, 166, 0.15);
+
+  /* Typography */
+  --font-heading: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+
+  /* Spacing scale */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2.5rem;
+  --space-xl:  4rem;
+  --space-2xl: 6rem;
+
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  /* Max content width */
+  --max-width: 1160px;
+
+  /* Transitions */
+  --transition: 0.25s ease;
+}
+
+/* ============================================================
+    ALTERNATIVE THEME: Dark + Gold
+    To activate: comment out the block above, uncomment this one
+  ============================================================ */
+/*
+:root {
+  --bg:        #0f0e0a;
+  --bg2:       #161410;
+  --surface:   #1c1a14;
+  --surface2:  #222018;
+  --border:    #2e2a1e;
+  --border2:   #3d3828;
+  --text:      #f5f0e8;
+  --muted:     #9e9070;
+  --faint:     #5a5240;
+  --accent:       #f59e0b;
+  --accent-dim:   #d97706;
+  --accent-glow:  rgba(245, 158, 11, 0.15);
+  --font-heading: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2.5rem;
+  --space-xl:  4rem;
+  --space-2xl: 6rem;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --max-width: 1160px;
+  --transition: 0.25s ease;
+}
+*/
