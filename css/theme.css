@@ -7,6 +7,7 @@
 /* ============================================================
     ACTIVE THEME: Dark Navy + Teal
    ============================================================ */
+
 :root {
 
   /* Backgrounds — from darkest to slightly lighter */
@@ -25,6 +26,7 @@
   --faint:     #3d5a74;
 
   /* Accent — teal */
+  /*--accent:       #f59e0b;*/
   --accent:       #14b8a6;
   --accent-dim:   #0d8a7c;
   --accent-glow:  rgba(20, 184, 166, 0.15);
@@ -53,10 +55,12 @@
   --transition: 0.25s ease;
 }
 
+
 /* ============================================================
     ALTERNATIVE THEME: Dark + Gold
     To activate: comment out the block above, uncomment this one
   ============================================================ */
+
 /*
 :root {
   --bg:        #0f0e0a;
