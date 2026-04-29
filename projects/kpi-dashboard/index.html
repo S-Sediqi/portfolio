@@ -29,13 +29,20 @@
   <!-- HEADER -->
   <header class="dash-header">
     <div class="dash-header-left">
-      <a href="../../index.html" class="dash-back-link">← Portfolio</a>
+      <a href="../../index.html" class="dash-back-link" data-i18n="back_link">← Portfolio</a>
       <span class="dash-header-divider">|</span>
-      <span class="dash-header-title">KPI Dashboard — Sample Data</span>
+      <span class="dash-header-title" data-i18n="header_title">KPI Dashboard — Sample Data</span>
     </div>
     <div class="dash-header-right">
-      <span class="dash-badge">● Live Data</span>
+      <span class="dash-badge" data-i18n="header_badge">● Live Data</span>
       <span class="dash-date" id="dash-date"></span>
+
+      <!-- Language toggle -->
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="de">DE</button>
+      </div>
+
     </div>
   </header>
 
@@ -45,13 +52,13 @@
     <!-- SIDEBAR -->
     <aside class="dash-sidebar">
 
-      <p class="sidebar-label">Filters</p>
+      <p class="sidebar-label" data-i18n="sidebar_filters">Filters</p>
 
       <!-- Year filter -->
       <div class="filter-group">
-        <label class="filter-label" for="filter-year">Year</label>
+        <label class="filter-label" for="filter-year" data-i18n="filter_year">Year</label>
         <select class="filter-select" id="filter-year">
-          <option value="all">All Years</option>
+          <option value="all" data-i18n="filter_all_years">All Years</option>
           <option value="2014">2014</option>
           <option value="2015">2015</option>
           <option value="2016">2016</option>
@@ -61,9 +68,9 @@
 
       <!-- Region filter -->
       <div class="filter-group">
-        <label class="filter-label" for="filter-region">Region</label>
+        <label class="filter-label" for="filter-region" data-i18n="filter_region">Region</label>
         <select class="filter-select" id="filter-region">
-          <option value="all">All Regions</option>
+          <option value="all" data-i18n="filter_all_regions">All Regions</option>
           <option value="East">East</option>
           <option value="West">West</option>
           <option value="Central">Central</option>
@@ -73,41 +80,46 @@
 
       <!-- Category filter -->
       <div class="filter-group">
-        <label class="filter-label" for="filter-category">Category</label>
+        <label class="filter-label" for="filter-category" data-i18n="filter_category">Category</label>
         <select class="filter-select" id="filter-category">
-          <option value="all">All Categories</option>
-          <option value="Furniture">Furniture</option>
-          <option value="Office Supplies">Office Supplies</option>
-          <option value="Technology">Technology</option>
+          <option value="all" data-i18n="filter_all_cats">All Categories</option>
+          <option value="Furniture" data-i18n="cat_furniture">Furniture</option>
+          <option value="Office Supplies" data-i18n="cat_office">Office Supplies</option>
+          <option value="Technology" data-i18n="cat_tech">Technology</option>
         </select>
       </div>
 
       <div class="sidebar-divider"></div>
 
-      <p class="sidebar-label">Scenario Modelling</p>
+      <p class="sidebar-label" data-i18n="sidebar_scenario">Scenario Modelling</p>
 
       <!-- Discount slider -->
       <div class="filter-group">
         <label class="filter-label">
-          Discount Rate: <span class="slider-value" id="val-discount">0%</span>
+          <span data-i18n="slider_discount">Discount Rate:</span>
+          <span class="slider-value" id="val-discount">0%</span>
         </label>
         <input type="range" class="filter-slider" id="slider-discount"
           min="0" max="50" step="5" value="0" />
-        <p class="filter-hint">Simulates applying a discount to all sales. Watch how profit margin drops.</p>
+        <p class="filter-hint" data-i18n="slider_discount_hint">
+          Simulates applying a discount to all sales. Watch how profit margin drops.
+        </p>
       </div>
 
       <!-- Cost slider -->
       <div class="filter-group">
         <label class="filter-label">
-          Cost Increase: <span class="slider-value" id="val-cost">0%</span>
+          <span data-i18n="slider_cost">Cost Increase:</span>
+          <span class="slider-value" id="val-cost">0%</span>
         </label>
         <input type="range" class="filter-slider" id="slider-cost"
           min="0" max="50" step="5" value="0" />
-        <p class="filter-hint">Simulates rising supply costs. Profit absorbs the increase directly.</p>
+        <p class="filter-hint" data-i18n="slider_cost_hint">
+          Simulates rising supply costs. Profit absorbs the increase directly.
+        </p>
       </div>
 
     </aside>
-    <!-- end sidebar -->
 
     <!-- MAIN CONTENT -->
     <main class="dash-main">
@@ -116,80 +128,78 @@
       <div class="kpi-grid">
 
         <div class="kpi-card">
-          <p class="kpi-label">Total Revenue</p>
+          <p class="kpi-label" data-i18n="kpi_revenue_label">Total Revenue</p>
           <p class="kpi-value" id="kpi-revenue">—</p>
-          <p class="kpi-sub">Sum of all sales in selected period</p>
+          <p class="kpi-sub" data-i18n="kpi_revenue_sub">Sum of all sales in selected period</p>
         </div>
 
         <div class="kpi-card">
-          <p class="kpi-label">Total Profit</p>
+          <p class="kpi-label" data-i18n="kpi_profit_label">Total Profit</p>
           <p class="kpi-value" id="kpi-profit">—</p>
-          <p class="kpi-sub">Revenue minus all costs</p>
+          <p class="kpi-sub" data-i18n="kpi_profit_sub">Revenue minus all costs</p>
         </div>
 
         <div class="kpi-card">
-          <p class="kpi-label">Profit Margin</p>
+          <p class="kpi-label" data-i18n="kpi_margin_label">Profit Margin</p>
           <p class="kpi-value" id="kpi-margin">—</p>
-          <p class="kpi-sub">Profit as a percentage of revenue</p>
+          <p class="kpi-sub" data-i18n="kpi_margin_sub">Profit as a percentage of revenue</p>
         </div>
 
         <div class="kpi-card">
-          <p class="kpi-label">Total Orders</p>
+          <p class="kpi-label" data-i18n="kpi_orders_label">Total Orders</p>
           <p class="kpi-value" id="kpi-orders">—</p>
-          <p class="kpi-sub">Number of individual line items sold</p>
+          <p class="kpi-sub" data-i18n="kpi_orders_sub">Number of individual line items sold</p>
         </div>
 
       </div>
-      <!-- end kpi-grid -->
 
       <!-- CHARTS -->
       <div class="charts-grid">
 
         <div class="chart-card">
-          <p class="chart-title">Monthly Revenue vs Profit</p>
-          <p class="chart-desc">Tracks revenue and profit trends over time. A widening gap indicates rising costs.</p>
+          <p class="chart-title" data-i18n="chart_revenue_title">Monthly Revenue vs Profit</p>
+          <p class="chart-desc" data-i18n="chart_revenue_desc">
+            Tracks revenue and profit trends over time. A widening gap indicates rising costs.
+          </p>
           <canvas id="chart-revenue"></canvas>
         </div>
 
         <div class="chart-card">
-          <p class="chart-title">Sales by Category</p>
-          <p class="chart-desc">Compares total revenue across product categories for the selected period.</p>
+          <p class="chart-title" data-i18n="chart_category_title">Sales by Category</p>
+          <p class="chart-desc" data-i18n="chart_category_desc">
+            Compares total revenue across product categories for the selected period.
+          </p>
           <canvas id="chart-category"></canvas>
         </div>
 
       </div>
-      <!-- end charts-grid -->
 
       <!-- DATA TABLE -->
       <div class="table-card">
-        <p class="chart-title">Monthly Breakdown</p>
-        <p class="chart-desc">Detailed month-by-month figures for the selected filters.</p>
+        <p class="chart-title" data-i18n="table_title">Monthly Breakdown</p>
+        <p class="chart-desc" data-i18n="table_desc">
+          Detailed month-by-month figures for the selected filters.
+        </p>
         <div class="table-wrap">
           <table class="dash-table">
             <thead>
               <tr>
-                <th>Month</th>
-                <th>Revenue</th>
-                <th>Profit</th>
-                <th>Margin</th>
-                <th>Orders</th>
+                <th data-i18n="col_month">Month</th>
+                <th data-i18n="col_revenue">Revenue</th>
+                <th data-i18n="col_profit">Profit</th>
+                <th data-i18n="col_margin">Margin</th>
+                <th data-i18n="col_orders">Orders</th>
               </tr>
             </thead>
-            <tbody id="table-body">
-              <!-- filled by JavaScript -->
-            </tbody>
+            <tbody id="table-body"></tbody>
           </table>
         </div>
       </div>
-      <!-- end table-card -->
 
     </main>
-    <!-- end dash-main -->
 
   </div>
-  <!-- end dash-layout -->
 
-  <!-- JavaScript -->
   <script src="js/dashboard.js"></script>
 
 </body>

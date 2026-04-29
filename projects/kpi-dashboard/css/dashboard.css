@@ -336,3 +336,37 @@ canvas {
 .dash-back-link:hover {
   opacity: 0.75;
 }
+
+/* ── Language Toggle — matches main portfolio style ── */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem;
+}
+
+.lang-btn {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.6rem;
+  border-radius: 5px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+  font-family: var(--font-body);
+  letter-spacing: 0.05em;
+}
+
+.lang-btn.active {
+  background: var(--accent);
+  color: #061318;
+}
+
+.lang-btn:hover:not(.active) {
+  color: var(--text);
+}

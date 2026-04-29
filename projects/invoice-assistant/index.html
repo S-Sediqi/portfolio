@@ -23,12 +23,19 @@
   <!-- HEADER -->
   <header class="inv-header">
     <div class="inv-header-left">
-      <a href="../../index.html" class="inv-back-link">← Portfolio</a>
+      <a href="../../index.html" class="inv-back-link" data-i18n="back_link">← Portfolio</a>
       <span class="inv-header-divider">|</span>
-      <span class="inv-header-title">AI Invoice Assistant</span>
+      <span class="inv-header-title" data-i18n="header_title">AI Invoice Assistant</span>
     </div>
     <div class="inv-header-right">
       <span class="inv-badge">● Claude API</span>
+
+      <!-- Language toggle — same pattern as main portfolio -->
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="de">DE</button>
+      </div>
+
     </div>
   </header>
 
@@ -40,9 +47,9 @@
 
       <!-- Page title -->
       <div class="inv-intro">
-        <p class="inv-label">AI + Automation</p>
-        <h1 class="inv-title">Invoice Extractor</h1>
-        <p class="inv-desc">
+        <p class="inv-label" data-i18n="page_label">AI + Automation</p>
+        <h1 class="inv-title" data-i18n="page_title">Invoice Extractor</h1>
+        <p class="inv-desc" data-i18n="page_desc">
           Upload a PDF invoice and let AI extract the key fields instantly —
           vendor, amounts, dates, and line items. Powered by Claude API.
         </p>
@@ -51,16 +58,16 @@
       <!-- Upload zone -->
       <div class="inv-upload-zone" id="upload-zone">
         <div class="inv-upload-icon">📄</div>
-        <p class="inv-upload-text">Drag &amp; drop a PDF invoice here</p>
-        <p class="inv-upload-sub">or click to select a file</p>
-        <p class="inv-upload-limit">PDF only · Max 5MB · Up to 3 pages</p>
-        <p class="inv-upload-coming">DOCX &amp; image support coming soon</p>
+        <p class="inv-upload-text" data-i18n="upload_text">Drag &amp; drop a PDF invoice here</p>
+        <p class="inv-upload-sub" data-i18n="upload_sub">or click to select a file</p>
+        <p class="inv-upload-limit" data-i18n="upload_limit">PDF only · Max 5MB · Up to 3 pages</p>
+        <p class="inv-upload-coming" data-i18n="upload_coming">DOCX &amp; image support coming soon</p>
         <input type="file" id="file-input" accept=".pdf" />
       </div>
 
       <!-- Extract button -->
       <button class="inv-btn" id="extract-btn" disabled>
-        <span id="btn-text">Select a file first</span>
+        <span id="btn-text" data-i18n="btn_select">Select a file first</span>
       </button>
 
       <!-- Status message -->
@@ -68,23 +75,23 @@
 
       <!-- How it works -->
       <div class="inv-how">
-        <p class="inv-how-label">How it works</p>
+        <p class="inv-how-label" data-i18n="how_label">How it works</p>
         <div class="inv-how-steps">
           <div class="inv-step">
             <span class="inv-step-num">1</span>
-            <span>Upload a PDF invoice</span>
+            <span data-i18n="step_1">Upload a PDF invoice</span>
           </div>
           <div class="inv-step">
             <span class="inv-step-num">2</span>
-            <span>Backend extracts text with pdfplumber</span>
+            <span data-i18n="step_2">Backend extracts text with pdfplumber</span>
           </div>
           <div class="inv-step">
             <span class="inv-step-num">3</span>
-            <span>Claude API reads and structures the data</span>
+            <span data-i18n="step_3">Claude API reads and structures the data</span>
           </div>
           <div class="inv-step">
             <span class="inv-step-num">4</span>
-            <span>Results appear instantly on the right</span>
+            <span data-i18n="step_4">Results appear instantly on the right</span>
           </div>
         </div>
       </div>
@@ -95,46 +102,40 @@
     <!-- RIGHT PANEL: results -->
     <div class="inv-right">
 
-      <!-- Empty state — shown before extraction -->
+      <!-- Empty state -->
       <div class="inv-empty" id="inv-empty">
         <div class="inv-empty-icon">🧾</div>
-        <p class="inv-empty-title">No invoice analysed yet</p>
-        <p class="inv-empty-sub">
+        <p class="inv-empty-title" data-i18n="empty_title">No invoice analysed yet</p>
+        <p class="inv-empty-sub" data-i18n="empty_sub">
           Upload a PDF on the left and click Extract to see the results here.
         </p>
       </div>
 
-      <!-- Loading state — shown during API call -->
+      <!-- Loading state -->
       <div class="inv-loading" id="inv-loading">
         <div class="inv-spinner"></div>
-        <p class="inv-loading-text">Analysing invoice...</p>
-        <p class="inv-loading-sub">Claude is reading your document</p>
+        <p class="inv-loading-text" data-i18n="loading_text">Analysing invoice...</p>
+        <p class="inv-loading-sub" data-i18n="loading_sub">Claude is reading your document</p>
       </div>
 
-      <!-- Results state — shown after successful extraction -->
+      <!-- Results state -->
       <div class="inv-results" id="inv-results">
-
-        <!-- Summary cards -->
         <div class="inv-cards" id="inv-cards"></div>
-
-        <!-- Line items table -->
         <div class="inv-table-wrap" id="inv-table-wrap">
-          <p class="inv-table-title">Line Items</p>
+          <p class="inv-table-title" data-i18n="table_title">Line Items</p>
           <table class="inv-table">
             <thead>
               <tr>
-                <th>Description</th>
-                <th>Qty</th>
-                <th>Unit Price</th>
-                <th>Total</th>
+                <th data-i18n="col_desc">Description</th>
+                <th data-i18n="col_qty">Qty</th>
+                <th data-i18n="col_unit">Unit Price</th>
+                <th data-i18n="col_total">Total</th>
               </tr>
             </thead>
             <tbody id="inv-table-body"></tbody>
           </table>
         </div>
-
       </div>
-      <!-- end inv-results -->
 
     </div>
     <!-- end inv-right -->
@@ -143,8 +144,8 @@
 
   <!-- FOOTER -->
   <footer class="inv-footer">
-    <span>© 2026 Samim Sediqi</span>
-    <span>Built with Python · Flask · Claude API · pdfplumber</span>
+    <span data-i18n="footer_copy">© 2026 Samim Sediqi</span>
+    <span data-i18n="footer_built">Built with Python · Flask · Claude API · pdfplumber</span>
   </footer>
 
   <script src="js/invoice.js"></script>
