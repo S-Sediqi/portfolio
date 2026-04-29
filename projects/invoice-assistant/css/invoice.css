@@ -1,0 +1,488 @@
+/* ============================================================
+   invoice.css — AI Invoice Assistant styles
+   Uses design tokens from ../../css/theme.css
+   No hardcoded colors — all values via CSS variables
+   ============================================================ */
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+.inv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.inv-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.inv-back-link {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity var(--transition);
+}
+
+.inv-back-link:hover {
+  opacity: 0.75;
+}
+
+.inv-header-divider {
+  color: var(--border);
+}
+
+.inv-header-title {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.inv-badge {
+  font-size: 0.78rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+/* ── Main layout ── */
+.inv-main {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 0;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── Left panel ── */
+.inv-left {
+  border-right: 1px solid var(--border);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  overflow-y: auto;
+}
+
+/* ── Intro ── */
+.inv-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+
+.inv-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 0.6rem;
+}
+
+.inv-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ── Upload zone ── */
+.inv-upload-zone {
+  border: 2px dashed var(--border2);
+  border-radius: var(--radius-md);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  transition:
+    border-color var(--transition),
+    background var(--transition);
+  background: var(--surface);
+}
+
+.inv-upload-zone:hover,
+.inv-upload-zone.dragover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
+.inv-upload-zone.has-file {
+  border-color: var(--accent);
+  border-style: solid;
+  background: var(--accent-glow);
+}
+
+/* Hide the actual file input but keep it clickable */
+#file-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.inv-upload-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.inv-upload-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.inv-upload-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.inv-upload-limit {
+  font-size: 0.75rem;
+  color: var(--faint);
+  letter-spacing: 0.03em;
+}
+
+/* ── Extract button ── */
+.inv-btn {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--accent);
+  color: #061318;
+  transition:
+    background var(--transition),
+    transform var(--transition),
+    opacity var(--transition);
+}
+
+.inv-btn:hover:not(:disabled) {
+  background: #1dcfbc;
+  transform: translateY(-1px);
+}
+
+.inv-btn:disabled {
+  background: var(--surface2);
+  color: var(--faint);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Status message ── */
+.inv-status {
+  font-size: 0.85rem;
+  color: var(--muted);
+  min-height: 1.2rem;
+}
+
+.inv-status.error {
+  color: #f87171;
+}
+
+/* ── How it works ── */
+.inv-how {
+  margin-top: auto;
+}
+
+.inv-how-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.inv-how-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.inv-step {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.83rem;
+  color: var(--muted);
+}
+
+.inv-step-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Right panel ── */
+.inv-right {
+  padding: 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Empty state ── */
+.inv-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-align: center;
+  opacity: 0.5;
+}
+
+.inv-empty-icon {
+  font-size: 3rem;
+}
+
+.inv-empty-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.inv-empty-sub {
+  font-size: 0.85rem;
+  color: var(--muted);
+  max-width: 28ch;
+  line-height: 1.6;
+}
+
+/* ── Loading state ── */
+.inv-loading {
+  flex: 1;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.inv-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.inv-loading-text {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.inv-loading-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* ── Results state ── */
+.inv-results {
+  display: none;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ── Summary cards grid ── */
+.inv-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.inv-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: border-color var(--transition);
+}
+
+.inv-card:hover {
+  border-color: var(--border2);
+}
+
+.inv-card-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.inv-card-value {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  word-break: break-word;
+}
+
+.inv-card-value.accent {
+  color: var(--accent);
+  font-size: 1.3rem;
+}
+
+/* ── Line items table ── */
+.inv-table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+}
+
+.inv-table-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+.inv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.inv-table th {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.inv-table td {
+  padding: 0.65rem 0.75rem;
+  color: var(--text);
+  border-bottom: 1px solid var(--surface2);
+  vertical-align: top;
+}
+
+.inv-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.inv-table tbody tr:hover {
+  background: var(--surface2);
+}
+
+.inv-table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+/* ── Footer ── */
+.inv-footer {
+  border-top: 1px solid var(--border);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--faint);
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .inv-main {
+    grid-template-columns: 1fr;
+  }
+
+  .inv-left {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+@media (max-width: 640px) {
+  .inv-header {
+    padding: 1rem;
+  }
+
+  .inv-left,
+  .inv-right {
+    padding: 1.25rem;
+  }
+
+  .inv-footer {
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: center;
+  }
+}
+
+.inv-upload-coming {
+  font-size: 0.72rem;
+  color: var(--accent);
+  opacity: 0.6;
+  margin-top: 0.3rem;
+  letter-spacing: 0.03em;
+}

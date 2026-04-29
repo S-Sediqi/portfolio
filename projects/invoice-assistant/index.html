@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Invoice Assistant — Samim Sediqi</title>
+  <meta name="description" content="AI-powered invoice data extraction — built by Samim Sediqi" />
+
+  <!-- Google Fonts — same as portfolio -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+
+  <!-- Shared design tokens — controls ALL colors site-wide -->
+  <link rel="stylesheet" href="../../css/theme.css" />
+
+  <!-- Page-specific styles -->
+  <link rel="stylesheet" href="css/invoice.css" />
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="inv-header">
+    <div class="inv-header-left">
+      <a href="../../index.html" class="inv-back-link">← Portfolio</a>
+      <span class="inv-header-divider">|</span>
+      <span class="inv-header-title">AI Invoice Assistant</span>
+    </div>
+    <div class="inv-header-right">
+      <span class="inv-badge">● Claude API</span>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="inv-main">
+
+    <!-- LEFT PANEL: upload + info -->
+    <div class="inv-left">
+
+      <!-- Page title -->
+      <div class="inv-intro">
+        <p class="inv-label">AI + Automation</p>
+        <h1 class="inv-title">Invoice Extractor</h1>
+        <p class="inv-desc">
+          Upload a PDF invoice and let AI extract the key fields instantly —
+          vendor, amounts, dates, and line items. Powered by Claude API.
+        </p>
+      </div>
+
+      <!-- Upload zone -->
+      <div class="inv-upload-zone" id="upload-zone">
+        <div class="inv-upload-icon">📄</div>
+        <p class="inv-upload-text">Drag &amp; drop a PDF invoice here</p>
+        <p class="inv-upload-sub">or click to select a file</p>
+        <p class="inv-upload-limit">PDF only · Max 5MB · Up to 3 pages</p>
+        <p class="inv-upload-coming">DOCX &amp; image support coming soon</p>
+        <input type="file" id="file-input" accept=".pdf" />
+      </div>
+
+      <!-- Extract button -->
+      <button class="inv-btn" id="extract-btn" disabled>
+        <span id="btn-text">Select a file first</span>
+      </button>
+
+      <!-- Status message -->
+      <div class="inv-status" id="inv-status"></div>
+
+      <!-- How it works -->
+      <div class="inv-how">
+        <p class="inv-how-label">How it works</p>
+        <div class="inv-how-steps">
+          <div class="inv-step">
+            <span class="inv-step-num">1</span>
+            <span>Upload a PDF invoice</span>
+          </div>
+          <div class="inv-step">
+            <span class="inv-step-num">2</span>
+            <span>Backend extracts text with pdfplumber</span>
+          </div>
+          <div class="inv-step">
+            <span class="inv-step-num">3</span>
+            <span>Claude API reads and structures the data</span>
+          </div>
+          <div class="inv-step">
+            <span class="inv-step-num">4</span>
+            <span>Results appear instantly on the right</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- end inv-left -->
+
+    <!-- RIGHT PANEL: results -->
+    <div class="inv-right">
+
+      <!-- Empty state — shown before extraction -->
+      <div class="inv-empty" id="inv-empty">
+        <div class="inv-empty-icon">🧾</div>
+        <p class="inv-empty-title">No invoice analysed yet</p>
+        <p class="inv-empty-sub">
+          Upload a PDF on the left and click Extract to see the results here.
+        </p>
+      </div>
+
+      <!-- Loading state — shown during API call -->
+      <div class="inv-loading" id="inv-loading">
+        <div class="inv-spinner"></div>
+        <p class="inv-loading-text">Analysing invoice...</p>
+        <p class="inv-loading-sub">Claude is reading your document</p>
+      </div>
+
+      <!-- Results state — shown after successful extraction -->
+      <div class="inv-results" id="inv-results">
+
+        <!-- Summary cards -->
+        <div class="inv-cards" id="inv-cards"></div>
+
+        <!-- Line items table -->
+        <div class="inv-table-wrap" id="inv-table-wrap">
+          <p class="inv-table-title">Line Items</p>
+          <table class="inv-table">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="inv-table-body"></tbody>
+          </table>
+        </div>
+
+      </div>
+      <!-- end inv-results -->
+
+    </div>
+    <!-- end inv-right -->
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="inv-footer">
+    <span>© 2026 Samim Sediqi</span>
+    <span>Built with Python · Flask · Claude API · pdfplumber</span>
+  </footer>
+
+  <script src="js/invoice.js"></script>
+
+</body>
+</html>
