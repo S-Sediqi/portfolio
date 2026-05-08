@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Knowledge Assistant — Coming Soon · Samim Sediqi</title>
+  <meta name="description" content="Knowledge Assistant — AI-powered document Q&A tool. Coming soon to sediqi.dev." />
+
+  <!-- Google Fonts — same as portfolio -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+
+  <!-- Shared design tokens — controls ALL colors site-wide -->
+  <link rel="stylesheet" href="../../css/theme.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    .cs-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+    }
+
+    .cs-back-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-family: var(--font-body);
+      transition: color var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .cs-back-link:hover { color: var(--accent); }
+
+    .cs-header-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .cs-badge {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-family: var(--font-body);
+      letter-spacing: 0.03em;
+    }
+
+    /* Language toggle — reuse existing site pattern */
+    .lang-toggle {
+      display: flex;
+      gap: 0.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.2rem;
+    }
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      padding: 0.25rem 0.6rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .lang-btn.active {
+      background: var(--accent);
+      color: #08111f;
+    }
+
+    /* ── MAIN ── */
+    .cs-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+
+    .cs-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem;
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle teal glow at the top of the card */
+    .cs-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
+    .cs-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: block;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-6px); }
+    }
+
+    .cs-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-family: var(--font-body);
+    }
+
+    .cs-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.75rem, 5vw, 2.25rem);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .cs-desc {
+      color: var(--muted);
+      font-size: 0.975rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    /* Stack chips */
+    .cs-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .cs-stack span {
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-family: var(--font-body);
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+    }
+
+    /* Status indicator */
+    .cs-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: var(--font-body);
+    }
+
+    .cs-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    /* Back button */
+    .cs-back-btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-decoration: none;
+      font-family: var(--font-body);
+      transition: color var(--transition);
+    }
+    .cs-back-btn:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    .cs-footer {
+      text-align: center;
+      padding: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--faint);
+      font-size: 0.8rem;
+      font-family: var(--font-body);
+    }
+    .cs-footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .cs-footer a:hover { color: var(--accent); }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="cs-header">
+    <a href="../../index.html" class="cs-back-link" data-i18n="back_link">← Portfolio</a>
+    <div class="cs-header-right">
+      <span class="cs-badge">● AI · RAG</span>
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="de">DE</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="cs-main">
+    <div class="cs-card">
+
+      <span class="cs-icon">🤖</span>
+
+      <p class="cs-label" data-i18n="page_label">AI · RAG · In Development</p>
+
+      <h1 class="cs-title" data-i18n="page_title">Knowledge Assistant</h1>
+
+      <p class="cs-desc" data-i18n="page_desc">
+        Upload your documents and ask questions in plain language.
+        The AI answers only from your files — with source references,
+        no hallucinations.
+      </p>
+
+      <div class="cs-stack">
+        <span>Python</span>
+        <span>Claude API</span>
+        <span>JavaScript</span>
+        <span>RAG</span>
+        <span>Docker</span>
+      </div>
+
+      <div class="cs-status">
+        <span class="cs-status-dot"></span>
+        <span data-i18n="status_text">In development — coming soon</span>
+      </div>
+
+      <br />
+      <a href="../../index.html" class="cs-back-btn" data-i18n="back_btn">← Back to portfolio</a>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="cs-footer">
+    <span>© 2026 Samim Sediqi · <a href="https://sediqi.dev">sediqi.dev</a></span>
+  </footer>
+
+  <script>
+    // ── i18n ──────────────────────────────────────────────────────────────────
+    const translations = {
+      en: {
+        back_link:   "← Portfolio",
+        page_label:  "AI · RAG · In Development",
+        page_title:  "Knowledge Assistant",
+        page_desc:   "Upload your documents and ask questions in plain language. The AI answers only from your files — with source references, no hallucinations.",
+        status_text: "In development — coming soon",
+        back_btn:    "← Back to portfolio",
+      },
+      de: {
+        back_link:   "← Portfolio",
+        page_label:  "KI · RAG · In Entwicklung",
+        page_title:  "Wissensassistent",
+        page_desc:   "Lade deine Dokumente hoch und stelle Fragen in natürlicher Sprache. Die KI antwortet nur aus deinen Dateien – mit Quellenangaben, keine Halluzinationen.",
+        status_text: "In Entwicklung – demnächst verfügbar",
+        back_btn:    "← Zurück zum Portfolio",
+      }
+    };
+
+    function detectLanguage() {
+      const stored = localStorage.getItem("preferred-lang");
+      if (stored === "en" || stored === "de") return stored;
+      return navigator.language.startsWith("de") ? "de" : "en";
+    }
+
+    function applyLanguage(lang) {
+      const t = translations[lang];
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (t[key]) el.textContent = t[key];
+      });
+      document.documentElement.lang = lang;
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+      });
+      localStorage.setItem("preferred-lang", lang);
+    }
+
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.addEventListener("click", () => applyLanguage(btn.dataset.lang));
+    });
+
+    applyLanguage(detectLanguage());
+  </script>
+
+</body>
+</html>
